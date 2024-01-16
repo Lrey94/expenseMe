@@ -7,18 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0443000F2B2B5E63006666EA /* CameraButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443000E2B2B5E63006666EA /* CameraButtonView.swift */; };
+		044300132B2B6110006666EA /* CameraPermsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044300122B2B6110006666EA /* CameraPermsManager.swift */; };
+		047545E22B20BDB500A3EC8E /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047545E12B20BDB500A3EC8E /* CameraView.swift */; };
+		047545E42B22009500A3EC8E /* ExpenseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047545E32B22009500A3EC8E /* ExpenseItemView.swift */; };
 		04D0FC632B206C4900AABF70 /* expenseMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC622B206C4900AABF70 /* expenseMeApp.swift */; };
 		04D0FC652B206C4900AABF70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC642B206C4900AABF70 /* ContentView.swift */; };
 		04D0FC672B206C4B00AABF70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FC662B206C4B00AABF70 /* Assets.xcassets */; };
 		04D0FC6A2B206C4B00AABF70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FC692B206C4B00AABF70 /* Preview Assets.xcassets */; };
+		04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC742B20716E00AABF70 /* AddExpenseView.swift */; };
+		04D0FC782B2071C500AABF70 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC772B2071C500AABF70 /* ExpenseViewModel.swift */; };
+		04D0FC7B2B2071ED00AABF70 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC7A2B2071ED00AABF70 /* Expense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0443000E2B2B5E63006666EA /* CameraButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonView.swift; sourceTree = "<group>"; };
+		044300122B2B6110006666EA /* CameraPermsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermsManager.swift; sourceTree = "<group>"; };
+		047545E12B20BDB500A3EC8E /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		047545E32B22009500A3EC8E /* ExpenseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseItemView.swift; sourceTree = "<group>"; };
 		04D0FC5F2B206C4900AABF70 /* expenseMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = expenseMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D0FC622B206C4900AABF70 /* expenseMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expenseMeApp.swift; sourceTree = "<group>"; };
 		04D0FC642B206C4900AABF70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04D0FC662B206C4B00AABF70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04D0FC692B206C4B00AABF70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		04D0FC742B20716E00AABF70 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
+		04D0FC772B2071C500AABF70 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
+		04D0FC7A2B2071ED00AABF70 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044300142B2B611A006666EA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				044300122B2B6110006666EA /* CameraPermsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		04D0FC562B206C4900AABF70 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +73,11 @@
 		04D0FC612B206C4900AABF70 /* expenseMe */ = {
 			isa = PBXGroup;
 			children = (
-				04D0FC622B206C4900AABF70 /* expenseMeApp.swift */,
-				04D0FC642B206C4900AABF70 /* ContentView.swift */,
+				044300142B2B611A006666EA /* Managers */,
+				04D0FC792B2071E200AABF70 /* Models */,
+				04D0FC762B2071B600AABF70 /* ViewModel */,
+				04D0FC712B2070B500AABF70 /* RootViews */,
+				04D0FC702B2070AD00AABF70 /* Views */,
 				04D0FC662B206C4B00AABF70 /* Assets.xcassets */,
 				04D0FC682B206C4B00AABF70 /* Preview Content */,
 			);
@@ -65,6 +90,42 @@
 				04D0FC692B206C4B00AABF70 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		04D0FC702B2070AD00AABF70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04D0FC742B20716E00AABF70 /* AddExpenseView.swift */,
+				047545E12B20BDB500A3EC8E /* CameraView.swift */,
+				047545E32B22009500A3EC8E /* ExpenseItemView.swift */,
+				0443000E2B2B5E63006666EA /* CameraButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04D0FC712B2070B500AABF70 /* RootViews */ = {
+			isa = PBXGroup;
+			children = (
+				04D0FC622B206C4900AABF70 /* expenseMeApp.swift */,
+				04D0FC642B206C4900AABF70 /* ContentView.swift */,
+			);
+			path = RootViews;
+			sourceTree = "<group>";
+		};
+		04D0FC762B2071B600AABF70 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04D0FC772B2071C500AABF70 /* ExpenseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		04D0FC792B2071E200AABF70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04D0FC7A2B2071ED00AABF70 /* Expense.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +198,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047545E42B22009500A3EC8E /* ExpenseItemView.swift in Sources */,
+				0443000F2B2B5E63006666EA /* CameraButtonView.swift in Sources */,
+				04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */,
+				04D0FC782B2071C500AABF70 /* ExpenseViewModel.swift in Sources */,
 				04D0FC652B206C4900AABF70 /* ContentView.swift in Sources */,
+				047545E22B20BDB500A3EC8E /* CameraView.swift in Sources */,
 				04D0FC632B206C4900AABF70 /* expenseMeApp.swift in Sources */,
+				044300132B2B6110006666EA /* CameraPermsManager.swift in Sources */,
+				04D0FC7B2B2071ED00AABF70 /* Expense.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
