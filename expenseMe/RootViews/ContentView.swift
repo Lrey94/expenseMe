@@ -10,8 +10,6 @@ import PhotosUI
 
 struct ContentView: View {
     
-    @State private var expenseViewModel = ExpenseViewModel()
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -23,12 +21,6 @@ struct ContentView: View {
                         .padding(.leading, 10)
                     Spacer()
                 }
-                
-                if expenseViewModel.expenses.isEmpty {
-                    ContentUnavailableView("No Expenses", systemImage: "banknote.fill", description: Text("Add a new one to get started."))
-                        .padding(.bottom, 50)
-                }
-                
                 Spacer()
             }
             .toolbar {
@@ -40,4 +32,8 @@ struct ContentView: View {
             }
         }
     }
+}
+
+#Preview {
+    ContentView()
 }
