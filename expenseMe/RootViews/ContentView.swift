@@ -11,26 +11,7 @@ import PhotosUI
 struct ContentView: View {
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                HStack {
-                    Text("Expense Me")
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .shadow(radius: 2)
-                        .padding(.leading, 10)
-                    Spacer()
-                }
-                Spacer()
-            }
-            .toolbar {
-                NavigationLink {
-                    AddExpenseView()
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
-        }
+        HomeView()
     }
 }
 

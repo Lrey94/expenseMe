@@ -16,9 +16,10 @@ class Expense {
     var expenseAmount: Double
     var image: Data?
     
-    init(expenseID: UUID = UUID(), expenseName: String, expenseAmount: Double) {
+    init(expenseID: UUID = UUID(), expenseName: String, expenseAmount: Double, image: Data? = nil) {
         self.expenseID = expenseID
         self.expenseName = expenseName
         self.expenseAmount = expenseAmount
+        self.image = image
     }
 }
