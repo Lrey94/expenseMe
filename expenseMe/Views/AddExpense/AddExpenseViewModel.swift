@@ -47,6 +47,10 @@ class AddExpenseViewModel: ObservableObject {
         }
     }
     
+    func deleteExpenseItem(expense: Expense) {
+        modelContext.delete(expense)
+    }
+    
     private func validateExpenseItem() -> Bool {
         if expenseName.isEmpty, expenseAmount == 0.0 {
             return false

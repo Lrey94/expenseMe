@@ -14,7 +14,7 @@ class Expense {
     @Attribute(.unique) var expenseID = UUID()
     var expenseName: String
     var expenseAmount: Double
-    var image: Data?
+    @Attribute(.externalStorage) var image: Data?
     
     init(expenseID: UUID = UUID(), expenseName: String, expenseAmount: Double, image: Data? = nil) {
         self.expenseID = expenseID

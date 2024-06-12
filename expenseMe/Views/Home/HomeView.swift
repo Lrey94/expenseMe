@@ -18,14 +18,12 @@ struct HomeView: View {
                 HeaderView
                 ListView
             }
-            .navigationDestination(for: String.self) { tag in
-                switch tag {
-                case EditExpenseView.tag:
-                    EditExpenseView(path: $path)
-                case AddExpenseView.tag:
+            .navigationDestination(for: NavigationDestination.self) { destination in
+                switch destination {
+                case .editExpense(let expense):
+                    EditExpenseView(path: $path, expense: expense)
+                case .addExpense:
                     AddExpenseView(path: $path)
-                default:
-                    EmptyView()
                 }
             }
             .toolbar {
@@ -57,7 +55,7 @@ struct HomeView: View {
             ScrollView {
                 ForEach(homeViewModel.expenses, id: \.expenseID) { expense in
                     if let image = expense.image {
-                        NavigationLink(destination: EditExpenseView(path: $path)) {
+                        NavigationLink(destination: EditExpenseView(path: $path, expense: expense)) {
                             ListItemView(expenseImage: image,
                                          expenseName: expense.expenseName,
                                          expenseAmount: expense.expenseAmount)
@@ -102,7 +100,7 @@ struct ListItemView: View {
         }
         .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 140)
         .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .clipShape(RoundedRectangle(cornerRadius: 15))
         .shadow(radius: 5)
         .padding(.horizontal, 5)
     }

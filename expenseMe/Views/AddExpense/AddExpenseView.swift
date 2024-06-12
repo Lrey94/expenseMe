@@ -54,7 +54,9 @@ struct AddExpenseView: View {
                             if addExpenseViewModel.sourceType == .camera {
                                 ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
                             } else {
-                                PhotoPicker(selectedImage: $addExpenseViewModel.image)
+                                PhotoPicker(selectedImage: $addExpenseViewModel.image) {
+                                    
+                                }
                             }
                         }
                 }
@@ -62,8 +64,7 @@ struct AddExpenseView: View {
                 AddExpenseNameTextField(expenseName: $addExpenseViewModel.expenseName, text: "Enter expense name")
                 AddExpenseAmountTextField(expenseAmount: $addExpenseViewModel.expenseAmount, text: "Enter expense amount")
                 
-                saveButton()
-                    .padding()
+                saveButton
                 
                 Spacer()
             }
@@ -73,6 +74,24 @@ struct AddExpenseView: View {
             }
         }
         .navigationTitle("Add New Expense")
+    }
+    
+    var saveButton: some View {
+        Button {
+            if addExpenseViewModel.addExpenseItem() {
+                path = NavigationPath()
+            }
+        } label: {
+            HStack {
+                Image(systemName: "checkmark")
+                Text("Save")
+            }
+            .fontWeight(.semibold)
+            .foregroundStyle(.white)
+            .frame(width: 200, height: 40)
+            .background(RoundedRectangle(cornerRadius: 10).fill(.green))
+        }
+        .padding()
     }
     
     var cameraButton: some View {
@@ -99,29 +118,6 @@ struct AddExpenseView: View {
                         }
                     }
                 Spacer()
-            }
-        }
-    }
-    
-    struct saveButton: View {
-        
-        @EnvironmentObject private var viewModel: AddExpenseViewModel
-        @Environment(\.dismiss) private var dismiss
-        
-        var body: some View {
-            Button {
-                if viewModel.addExpenseItem() {
-                    dismiss()
-                }
-                
-            } label: {
-                HStack {
-                    Image(systemName: "checkmark")
-                    Text("Save")
-                }
-                .fontWeight(.semibold)
-                .frame(width: 200, height: 40)
-                .background(RoundedRectangle(cornerRadius: 10).fill(.green))
             }
         }
     }
