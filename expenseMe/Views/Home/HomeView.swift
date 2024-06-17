@@ -13,7 +13,7 @@ struct HomeView: View {
     @State var path: NavigationPath = .init()
     
     var body: some View {
-        NavigationStack(path: $path.animation(.easeIn)) {
+        NavigationStack(path: $path) {
             VStack {
                 HeaderView
                 ListView
@@ -27,7 +27,9 @@ struct HomeView: View {
                 }
             }
             .toolbar {
-                NavigationLink(destination: AddExpenseView(path: $path)) {
+                Button {
+                    path.append(NavigationDestination.addExpense)
+                } label: {
                     Image(systemName: "plus")
                 }
             }
@@ -52,16 +54,20 @@ struct HomeView: View {
     
     var ListView: some View {
         VStack {
-            ScrollView {
-                ForEach(homeViewModel.expenses, id: \.expenseID) { expense in
-                    if let image = expense.image {
-                        NavigationLink(destination: EditExpenseView(path: $path, expense: expense)) {
-                            ListItemView(expenseImage: image,
-                                         expenseName: expense.expenseName,
-                                         expenseAmount: expense.expenseAmount)
+            if homeViewModel.expenses.isEmpty {
+                ContentUnavailableView("No expense items", systemImage: "exclamationmark.triangle.fill")
+            } else {
+                ScrollView {
+                    ForEach(homeViewModel.expenses, id: \.expenseID) { expense in
+                        if let image = expense.image {
+                            NavigationLink(value: NavigationDestination.editExpense(expense: expense)) {
+                                ListItemView(expenseImage: image,
+                                             expenseName: expense.expenseName,
+                                             expenseAmount: expense.expenseAmount)
+                            }
+                            .isDetailLink(false)
+                            .padding()
                         }
-                        .isDetailLink(false)
-                        .padding()
                     }
                 }
             }

@@ -13,74 +13,73 @@ struct AddExpenseView: View {
     
     @EnvironmentObject private var addExpenseViewModel: AddExpenseViewModel
     
-    static let tag = "AddExpenseView"
+    static let tag = NavigationDestination.addExpense
     
     @Binding var path: NavigationPath
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                if let image = addExpenseViewModel.image {
-                    ZStack(alignment: .topTrailing) {
-                        VStack(alignment: .leading) {
-                            Text("Your Chosen Image")
-                                .fontWeight(.bold)
-                                .font(.title3)
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: UIScreen.main.bounds.width - 60, height: 200)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .shadow(radius: 5)
-                        }
-                        Button(action: {
-                            withAnimation {
-                                addExpenseViewModel.image = nil
-                            }
-                        }) {
-                            Image(systemName: "x.circle.fill")
-                                .resizable()
-                                .frame(width: 40, height: 37)
-                                .foregroundColor(.red)
-                                .symbolRenderingMode(.multicolor)
-                        }
-                        .padding(10)
-                        .offset(x: 20, y: 10)
+        VStack {
+            if let image = addExpenseViewModel.image {
+                ZStack(alignment: .topTrailing) {
+                    VStack(alignment: .leading) {
+                        Text("Your Chosen Image")
+                            .fontWeight(.bold)
+                            .font(.title3)
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width - 60, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow(radius: 5)
                     }
-                    .padding(.top)
-                } else {
-                    cameraButton
-                        .padding()
-                        .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
-                            if addExpenseViewModel.sourceType == .camera {
-                                ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
-                            } else {
-                                PhotoPicker(selectedImage: $addExpenseViewModel.image) {
-                                    
-                                }
+                    Button(action: {
+                        withAnimation {
+                            addExpenseViewModel.image = nil
+                        }
+                    }) {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 37)
+                            .foregroundColor(.red)
+                            .symbolRenderingMode(.multicolor)
+                    }
+                    .padding(10)
+                    .offset(x: 20, y: 10)
+                }
+                .padding(.top)
+            } else {
+                cameraButton
+                    .padding()
+                    .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
+                        if addExpenseViewModel.sourceType == .camera {
+                            ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
+                        } else {
+                            PhotoPicker(selectedImage: $addExpenseViewModel.image) {
+                                
                             }
                         }
-                }
-                
-                AddExpenseNameTextField(expenseName: $addExpenseViewModel.expenseName, text: "Enter expense name")
-                AddExpenseAmountTextField(expenseAmount: $addExpenseViewModel.expenseAmount, text: "Enter expense amount")
-                
-                saveButton
-                
-                Spacer()
+                    }
             }
-            .alert(isPresented: $addExpenseViewModel.showErrorMessage) {
-                Alert(title: Text("Error!"), message: Text(addExpenseViewModel.errorMessage), 
-                      dismissButton: .default(Text("Got it!")))
-            }
+            
+            AddExpenseNameTextField(text: "Enter expense name")
+            AddExpenseAmountTextField(text: "Enter expense amount")
+            
+            saveButton
+            
+            Spacer()
         }
-        .navigationTitle("Add New Expense")
+        .alert(isPresented: $addExpenseViewModel.showErrorMessage) {
+            Alert(title: Text("Error!"), message: Text(addExpenseViewModel.errorMessage),
+                  dismissButton: .default(Text("Got it!")))
+        }
+        .onAppear {
+            print("onAppear: \(path.count)")
+        }
     }
     
     var saveButton: some View {
         Button {
-            if addExpenseViewModel.addExpenseItem() {
-                path = NavigationPath()
-            }
+            addExpenseViewModel.addExpenseItem()
+            path.removeLast()
         } label: {
             HStack {
                 Image(systemName: "checkmark")
@@ -125,14 +124,14 @@ struct AddExpenseView: View {
 
 struct AddExpenseNameTextField: View {
     
-    @Binding var expenseName: String
+    @EnvironmentObject private var viewModel: AddExpenseViewModel
     let text: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Expense Name")
                 .fontWeight(.semibold)
-            TextField(text, text: $expenseName)
+            TextField(text, text: $viewModel.expenseName)
                 .textFieldStyle(.roundedBorder)
         }
         .padding([.leading, .top])
@@ -141,14 +140,15 @@ struct AddExpenseNameTextField: View {
 
 struct AddExpenseAmountTextField: View {
     
-    @Binding var expenseAmount: Double
+    @EnvironmentObject private var viewModel: AddExpenseViewModel
+    
     let text: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Expense Amount")
                 .fontWeight(.semibold)
-            TextField(text, value: $expenseAmount, format: .number)                
+            TextField(text, value: $viewModel.expenseAmount, format: .number)
                 .textFieldStyle(.roundedBorder)
         }
         .padding([.leading, .top])

@@ -17,10 +17,11 @@ struct EditExpenseView: View {
     
     let expense: Expense
     
+    @State private var showDeleteAlert = false
+    
     var body: some View {
         VStack {
             if let imageData = expense.image, let uiImage = UIImage(data: imageData) {
-                ZStack(alignment: .topTrailing) {
                     VStack(alignment: .leading) {
                         Text("Your Chosen Image")
                             .fontWeight(.bold)
@@ -32,22 +33,7 @@ struct EditExpenseView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .shadow(radius: 5)
                     }
-                    Button(action: {
-                        withAnimation {
-                            expense.image = nil
-                        }
-                    }) {
-                        Image(systemName: "x.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 37)
-                            .foregroundColor(.red)
-                            .symbolRenderingMode(.multicolor)
-                    }
-                    .padding(10)
-                    .offset(x: 20, y: 10)
-                }
-                .padding(.top)
-            } else {
+                } else {
                 cameraButton
                     .padding()
                     .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
@@ -61,42 +47,51 @@ struct EditExpenseView: View {
                     }
             }
             
-            AddExpenseNameTextField(expenseName: $addExpenseViewModel.expenseName, text: "Enter expense name")
-            AddExpenseAmountTextField(expenseAmount: $addExpenseViewModel.expenseAmount, text: "Enter expense amount")
-            
-            saveButton
+            VStack(spacing: 15) {
+                expenseNameTextView
+                expenseAmountTextView
+            }
+            .padding(.top)
             
             Spacer()
             
             deleteButton
         }
-        .alert(isPresented: $addExpenseViewModel.showErrorMessage) {
-            Alert(title: Text("Error!"), message: Text(addExpenseViewModel.errorMessage),
-                  dismissButton: .default(Text("Got it!")))
+        .alert(isPresented: $showDeleteAlert) {
+            Alert(title: Text("Are you sure you want to delete this expense?"), message: Text(addExpenseViewModel.errorMessage),
+                  primaryButton: .destructive(Text("Delete")) {
+                addExpenseViewModel.deleteExpenseItem(expense: expense)
+                path = NavigationPath()
+            },
+                  secondaryButton: .cancel())
         }
     }
     
-    var saveButton: some View {
-        Button {
-            if addExpenseViewModel.addExpenseItem() {
-                path = NavigationPath()
-            }
-        } label: {
-            HStack {
-                Image(systemName: "checkmark")
-                Text("Save")
-            }
-            .foregroundStyle(.white)
-            .fontWeight(.semibold)
-            .frame(width: (UIScreen.current?.bounds.width ?? 0) - 60, height: 45)
-            .background(RoundedRectangle(cornerRadius: 10).fill(.green))
+    var expenseNameTextView: some View {
+        HStack {
+            Text(expense.expenseName)
+                .font(.title3)
+                .padding()
+            
         }
-        .padding()
+        .frame(width: UIScreen.main.bounds.width * 0.9, height: 40)
+        .background(RoundedRectangle(cornerRadius: 10).fill(.gray.opacity(0.7)))
+    }
+    
+    var expenseAmountTextView: some View {
+        HStack {
+            Text("£\(String(format: "%.2f", expense.expenseAmount))")
+                .font(.title3)
+                .padding()
+        }
+        .frame(width: UIScreen.main.bounds.width * 0.9, height: 40)
+        .background(RoundedRectangle(cornerRadius: 10).fill(.gray.opacity(0.7)))
     }
     
     var deleteButton: some View {
         Button {
-            addExpenseViewModel.deleteExpenseItem(expense: expense)
+            showDeleteAlert.toggle()
+            
         } label: {
             HStack {
                 Image(systemName: "trash.fill")

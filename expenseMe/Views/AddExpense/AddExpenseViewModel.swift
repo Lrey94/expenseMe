@@ -28,22 +28,20 @@ class AddExpenseViewModel: ObservableObject {
         self.modelContext = modelContext
     }
     
-    func addExpenseItem() -> Bool {
+    func addExpenseItem() {
         if image != nil {
             if validateExpenseItem() {
                 let imageData = image?.jpegData(compressionQuality: 1)
                 let expenseItem = Expense(expenseName: expenseName, expenseAmount: expenseAmount, image: imageData)
                 modelContext.insert(expenseItem)
-                return true
+                resetExpenseData()
             } else {
                 self.showErrorMessage = true
                 self.errorMessage = "Check the details you have entered"
-                return false
             }
         } else {
             self.showErrorMessage = true
             self.errorMessage = "Please select or take an image"
-            return false
         }
     }
     
@@ -56,5 +54,11 @@ class AddExpenseViewModel: ObservableObject {
             return false
         }
         return true
+    }
+    
+    private func resetExpenseData() {
+        image = nil
+        expenseName = ""
+        expenseAmount = 0.0
     }
 }
