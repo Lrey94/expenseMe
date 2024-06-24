@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftData
+import MapKit
 
 class AddExpenseViewModel: ObservableObject {
     
@@ -21,6 +22,9 @@ class AddExpenseViewModel: ObservableObject {
     @Published var showErrorMessage = false
     @Published var shouldDismiss = false
     @Published var errorMessage = ""
+    
+    @Published var date: Date?
+    @Published var location: CLLocationCoordinate2D?
     
     let modelContext: ModelContext
     

@@ -11,6 +11,7 @@ import SwiftData
 class HomeViewModel: ObservableObject {
     
     @Published var expenses: [Expense] = []
+    @Published var runningExpenseTotal: Double = 0
     
     let modelContext: ModelContext
     
@@ -24,8 +25,18 @@ class HomeViewModel: ObservableObject {
         )
         do {
             expenses = try modelContext.fetch(fetchDescriptor)
+            if !expenses.isEmpty {
+                calculateTotalExpenseAmount()
+            }
         } catch {
             print("Unable to fetch expenses: \(error)")
+        }
+    }
+    
+    private func calculateTotalExpenseAmount() {
+        self.runningExpenseTotal = 0.0
+        for expense in expenses {
+            self.runningExpenseTotal += expense.expenseAmount
         }
     }
     

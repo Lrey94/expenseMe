@@ -11,6 +11,9 @@ import PhotosUI
 struct PhotoPicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
+    @Binding var date: Date?
+    @Binding var location: CLLocationCoordinate2D?
+    
     var onImagePicked: () -> Void
     
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
@@ -27,6 +30,13 @@ struct PhotoPicker: UIViewControllerRepresentable {
                             self.parent.selectedImage = uiImage
                             self.parent.onImagePicked()
                         }
+                    }
+                }
+                if let assetId = result.assetIdentifier {
+                    let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
+                    DispatchQueue.main.async {
+                        self.parent.date = assetResults.firstObject?.creationDate
+                        self.parent.location = assetResults.firstObject?.location?.coordinate
                     }
                 }
             }

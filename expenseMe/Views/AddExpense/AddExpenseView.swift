@@ -53,7 +53,7 @@ struct AddExpenseView: View {
                         if addExpenseViewModel.sourceType == .camera {
                             ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image) {
+                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date, location: $addExpenseViewModel.location) {
                                 
                             }
                         }

@@ -22,7 +22,7 @@
 		04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC742B20716E00AABF70 /* AddExpenseView.swift */; };
 		04D0FC7B2B2071ED00AABF70 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FC7A2B2071ED00AABF70 /* Expense.swift */; };
 		04D123AA2BF6375300EBE588 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D123A92BF6375300EBE588 /* UIScreenExtension.swift */; };
-		04EE48672BCD3DBF00F22368 /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EE48662BCD3DBF00F22368 /* EditExpenseView.swift */; };
+		04EE48672BCD3DBF00F22368 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EE48662BCD3DBF00F22368 /* ExpenseDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,7 @@
 		04D0FC7A2B2071ED00AABF70 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		04D123A72BF62FF100EBE588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04D123A92BF6375300EBE588 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
-		04EE48662BCD3DBF00F22368 /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
+		04EE48662BCD3DBF00F22368 /* ExpenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +180,7 @@
 		04EE48652BCD3DB400F22368 /* EditExpense */ = {
 			isa = PBXGroup;
 			children = (
-				04EE48662BCD3DBF00F22368 /* EditExpenseView.swift */,
+				04EE48662BCD3DBF00F22368 /* ExpenseDetailView.swift */,
 			);
 			path = EditExpense;
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 				04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */,
 				0459115D2BC436BE009FD342 /* AddExpenseViewModel.swift in Sources */,
 				045911622BC4389B009FD342 /* HomeView.swift in Sources */,
-				04EE48672BCD3DBF00F22368 /* EditExpenseView.swift in Sources */,
+				04EE48672BCD3DBF00F22368 /* ExpenseDetailView.swift in Sources */,
 				04D0FC652B206C4900AABF70 /* ContentView.swift in Sources */,
 				04D123AA2BF6375300EBE588 /* UIScreenExtension.swift in Sources */,
 				0421E9982C19F1C80064419C /* NavigationDestination.swift in Sources */,
@@ -407,6 +407,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseMe/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of your receipts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,6 +439,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseMe/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of your receipts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

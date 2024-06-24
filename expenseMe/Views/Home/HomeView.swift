@@ -21,7 +21,7 @@ struct HomeView: View {
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
                 case .editExpense(let expense):
-                    EditExpenseView(path: $path, expense: expense)
+                    ExpenseDetailView(path: $path, expense: expense)
                 case .addExpense:
                     AddExpenseView(path: $path)
                 }
@@ -45,6 +45,17 @@ struct HomeView: View {
                     .shadow(radius: 2)
                     .padding(.leading, 10)
                 Spacer()
+            }
+            if !homeViewModel.expenses.isEmpty {
+                HStack {
+                    Text("Total to be claimed: \(homeViewModel.runningExpenseTotal > 0.0 ? "£" : "")\(homeViewModel.runningExpenseTotal != 0.0 ? String(format: "%.2f", homeViewModel.runningExpenseTotal) : "Unavailable")")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .shadow(radius: 2)
+                        .padding(.leading, 10)
+                    Spacer()
+                }
+                .padding(.top)
             }
         }
         .onAppear {

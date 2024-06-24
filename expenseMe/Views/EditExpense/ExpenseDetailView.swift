@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct EditExpenseView: View {
+struct ExpenseDetailView: View {
     
     @EnvironmentObject private var addExpenseViewModel: AddExpenseViewModel
-    
-    static let tag = "EditExpenseView"
     
     @Binding var path: NavigationPath
     
@@ -22,37 +21,39 @@ struct EditExpenseView: View {
     var body: some View {
         VStack {
             if let imageData = expense.image, let uiImage = UIImage(data: imageData) {
-                    VStack(alignment: .leading) {
-                        Text("Your Chosen Image")
-                            .fontWeight(.bold)
-                            .font(.title3)
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: UIScreen.main.bounds.width - 40, height: 200)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .shadow(radius: 5)
-                    }
-                } else {
+                VStack(alignment: .leading) {
+                    Text("Expense Image")
+                        .fontWeight(.bold)
+                        .font(.title3)
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 200)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .shadow(radius: 5)
+                }
+            } else {
                 cameraButton
                     .padding()
                     .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
                         if addExpenseViewModel.sourceType == .camera {
                             ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image) {
+                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date, location: $addExpenseViewModel.location) {
                                 handleImagePicked()
                             }
                         }
                     }
             }
-            
-            VStack(spacing: 15) {
-                expenseNameTextView
-                expenseAmountTextView
+            HStack {
+                VStack(alignment: .leading, spacing: 20) {
+                    expenseNameTextView
+                    expenseAmountTextView
+                    expenseImageMetadataView
+                }
+                .padding([.top, .leading])
+                Spacer()
             }
-            .padding(.top)
-            
             Spacer()
             
             deleteButton
@@ -61,37 +62,50 @@ struct EditExpenseView: View {
             Alert(title: Text("Are you sure you want to delete this expense?"), message: Text(addExpenseViewModel.errorMessage),
                   primaryButton: .destructive(Text("Delete")) {
                 addExpenseViewModel.deleteExpenseItem(expense: expense)
-                path = NavigationPath()
+                path.removeLast()
             },
                   secondaryButton: .cancel())
         }
     }
     
     var expenseNameTextView: some View {
-        HStack {
-            Text(expense.expenseName)
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Expense Name")
                 .font(.title3)
-                .padding()
-            
+                .fontWeight(.bold)
+            Text(expense.expenseName)
         }
-        .frame(width: UIScreen.main.bounds.width * 0.9, height: 40)
-        .background(RoundedRectangle(cornerRadius: 10).fill(.gray.opacity(0.7)))
+        .padding(.leading)
     }
     
     var expenseAmountTextView: some View {
-        HStack {
-            Text("£\(String(format: "%.2f", expense.expenseAmount))")
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Expense Amount")
                 .font(.title3)
-                .padding()
+                .fontWeight(.bold)
+            Text("£\(String(format: "%.2f", expense.expenseAmount))")
         }
-        .frame(width: UIScreen.main.bounds.width * 0.9, height: 40)
-        .background(RoundedRectangle(cornerRadius: 10).fill(.gray.opacity(0.7)))
+        .padding(.leading)
+    }
+    
+    var expenseImageMetadataView: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Image Metadata")
+                .font(.title3)
+                .fontWeight(.bold)
+            if let date = addExpenseViewModel.date {
+                Text("Date: \(date.formatted(date: .abbreviated, time: .omitted))")
+            }
+            if let location = addExpenseViewModel.location {
+                Text("Location: \(location.latitude), \(location.longitude)")
+            }
+        }
+        .padding(.leading)
     }
     
     var deleteButton: some View {
         Button {
             showDeleteAlert.toggle()
-            
         } label: {
             HStack {
                 Image(systemName: "trash.fill")
@@ -139,9 +153,20 @@ struct EditExpenseView: View {
     }
 }
 
-struct EditExpenseView_Preview: PreviewProvider {
+struct ExpenseDetailView_Preview: PreviewProvider {
     @State static var path: NavigationPath = .init()
+    static var modelContext: ModelContext = {
+        do {
+            let modelContainer = try ModelContainer(for: Expense.self)
+            return modelContainer.mainContext
+        } catch {
+            print(error)
+            fatalError("Unable to create modelContainer: \(error)")
+        }
+    }()
+    static var viewModel = AddExpenseViewModel(modelContext: modelContext)
     static var previews: some View {
-        EditExpenseView(path: $path, expense: Expense(expenseName: "Expense", expenseAmount: 12.00))
+        ExpenseDetailView(path: $path, expense: Expense(expenseName: "Expense", expenseAmount: 12.00))
+            .environmentObject(viewModel)
     }
 }
