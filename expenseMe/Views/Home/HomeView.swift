@@ -48,7 +48,7 @@ struct HomeView: View {
             }
             if !homeViewModel.expenses.isEmpty {
                 HStack {
-                    Text("Total to be claimed: \(homeViewModel.runningExpenseTotal > 0.0 ? "£" : "")\(homeViewModel.runningExpenseTotal != 0.0 ? String(format: "%.2f", homeViewModel.runningExpenseTotal) : "Unavailable")")
+                    Text("Total to be claimed: \(homeViewModel.runningExpenseTotal >= 0.0 ? "£" : "")\(homeViewModel.runningExpenseTotal >= 0.0 ? String(format: "%.2f", homeViewModel.runningExpenseTotal) : "Unavailable")")
                         .font(.title2)
                         .fontWeight(.medium)
                         .shadow(radius: 2)

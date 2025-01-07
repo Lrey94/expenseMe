@@ -39,7 +39,7 @@ struct ExpenseDetailView: View {
                         if addExpenseViewModel.sourceType == .camera {
                             ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date, location: $addExpenseViewModel.location) {
+                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date) {
                                 handleImagePicked()
                             }
                         }
@@ -65,6 +65,10 @@ struct ExpenseDetailView: View {
                 path.removeLast()
             },
                   secondaryButton: .cancel())
+        }
+        .onAppear {
+            print(expense.expenseImageLatitude)
+            print(expense.expenseImageLongitude)
         }
     }
     
@@ -93,12 +97,23 @@ struct ExpenseDetailView: View {
             Text("Image Metadata")
                 .font(.title3)
                 .fontWeight(.bold)
-            if let date = addExpenseViewModel.date {
-                Text("Date: \(date.formatted(date: .abbreviated, time: .omitted))")
+            if addExpenseViewModel.geocodingInProgress {
+                ProgressView("Loading Metadata....")
+            } else {
+                if let date = addExpenseViewModel.date {
+                    Text("Date: \(date.formatted(date: .abbreviated, time: .omitted))")
+                } else {
+                    Text("No Metadata Date found")
+                }
+                if let metadataDetails = addExpenseViewModel.metadataLocationDetails {
+                    Text("Location: \(metadataDetails.name)")
+                    Text("Location: \(metadataDetails.city)")
+                    Text("Location: \(metadataDetails.country)")
+                } else {
+                    Text("No Metadata Location found")
+                }
             }
-            if let location = addExpenseViewModel.location {
-                Text("Location: \(location.latitude), \(location.longitude)")
-            }
+            
         }
         .padding(.leading)
     }
@@ -164,7 +179,8 @@ struct ExpenseDetailView_Preview: PreviewProvider {
             fatalError("Unable to create modelContainer: \(error)")
         }
     }()
-    static var viewModel = AddExpenseViewModel(modelContext: modelContext)
+    static var locationManager = LocationManager()
+    static var viewModel = AddExpenseViewModel(modelContext: modelContext, locationManager: locationManager)
     static var previews: some View {
         ExpenseDetailView(path: $path, expense: Expense(expenseName: "Expense", expenseAmount: 12.00))
             .environmentObject(viewModel)

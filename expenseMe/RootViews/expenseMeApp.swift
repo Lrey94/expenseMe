@@ -20,8 +20,8 @@ struct expenseMeApp: App {
         do {
             modelContainer = try ModelContainer(for: Expense.self)
             let modelContext = modelContainer.mainContext
-            
-            _addExpenseViewModel = StateObject(wrappedValue: AddExpenseViewModel(modelContext: modelContext))
+            let locationManager = LocationManager()
+            _addExpenseViewModel = StateObject(wrappedValue: AddExpenseViewModel(modelContext: modelContext, locationManager: locationManager))
             _homeViewModel = StateObject(wrappedValue: HomeViewModel(modelContext: modelContext))
         } catch {
             fatalError("Could not initialize ModelContainer when launching app")
@@ -37,3 +37,4 @@ struct expenseMeApp: App {
         .modelContainer(modelContainer)
     }
 }
+

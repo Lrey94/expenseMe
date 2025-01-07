@@ -12,6 +12,9 @@
 		045911622BC4389B009FD342 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045911612BC4389B009FD342 /* HomeView.swift */; };
 		045911642BC438B4009FD342 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045911632BC438B4009FD342 /* HomeViewModel.swift */; };
 		047545E42B22009500A3EC8E /* ExpenseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047545E32B22009500A3EC8E /* ExpenseItemView.swift */; };
+		04BAF2F22C2AAEBE001E7CBF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F12C2AAEBE001E7CBF /* LocationManager.swift */; };
+		04BAF2F42C2AAF31001E7CBF /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F32C2AAF31001E7CBF /* GeoLocation.swift */; };
+		04BAF2F62C2AB316001E7CBF /* GeocodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F52C2AB316001E7CBF /* GeocodeError.swift */; };
 		04C8D3422B6CE38A0064BCAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D3412B6CE38A0064BCAC /* ImagePicker.swift */; };
 		04C8D3452B6CE8620064BCAC /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D3442B6CE8620064BCAC /* SourceType.swift */; };
 		04C8D3492B6CF48A0064BCAC /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D3482B6CF48A0064BCAC /* PhotoPicker.swift */; };
@@ -31,6 +34,9 @@
 		045911612BC4389B009FD342 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		045911632BC438B4009FD342 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		047545E32B22009500A3EC8E /* ExpenseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseItemView.swift; sourceTree = "<group>"; };
+		04BAF2F12C2AAEBE001E7CBF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		04BAF2F32C2AAF31001E7CBF /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		04BAF2F52C2AB316001E7CBF /* GeocodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeError.swift; sourceTree = "<group>"; };
 		04C8D3412B6CE38A0064BCAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		04C8D3442B6CE8620064BCAC /* SourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceType.swift; sourceTree = "<group>"; };
 		04C8D3482B6CF48A0064BCAC /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
@@ -92,11 +98,20 @@
 			path = ExpenseItem;
 			sourceTree = "<group>";
 		};
+		04BAF2F02C2AAEA2001E7CBF /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				04BAF2F12C2AAEBE001E7CBF /* LocationManager.swift */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
 		04C8D3432B6CE8550064BCAC /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 				04C8D3442B6CE8620064BCAC /* SourceType.swift */,
 				0421E9972C19F1C80064419C /* NavigationDestination.swift */,
+				04BAF2F52C2AB316001E7CBF /* GeocodeError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -121,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				04D123A72BF62FF100EBE588 /* Info.plist */,
+				04BAF2F02C2AAEA2001E7CBF /* LocationManager */,
 				04D123A82BF6373400EBE588 /* Extensions */,
 				04C8D3432B6CE8550064BCAC /* Enums */,
 				04D0FC792B2071E200AABF70 /* Models */,
@@ -165,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				04D0FC7A2B2071ED00AABF70 /* Expense.swift */,
+				04BAF2F32C2AAF31001E7CBF /* GeoLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,8 +272,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BAF2F42C2AAF31001E7CBF /* GeoLocation.swift in Sources */,
 				047545E42B22009500A3EC8E /* ExpenseItemView.swift in Sources */,
 				045911642BC438B4009FD342 /* HomeViewModel.swift in Sources */,
+				04BAF2F22C2AAEBE001E7CBF /* LocationManager.swift in Sources */,
 				04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */,
 				0459115D2BC436BE009FD342 /* AddExpenseViewModel.swift in Sources */,
 				045911622BC4389B009FD342 /* HomeView.swift in Sources */,
@@ -267,6 +286,7 @@
 				04D0FC632B206C4900AABF70 /* expenseMeApp.swift in Sources */,
 				04C8D3452B6CE8620064BCAC /* SourceType.swift in Sources */,
 				04C8D3422B6CE38A0064BCAC /* ImagePicker.swift in Sources */,
+				04BAF2F62C2AB316001E7CBF /* GeocodeError.swift in Sources */,
 				04C8D3492B6CF48A0064BCAC /* PhotoPicker.swift in Sources */,
 				04D0FC7B2B2071ED00AABF70 /* Expense.swift in Sources */,
 			);
@@ -407,6 +427,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseMe/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of your receipts";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To enable geolocation on metadata within the app.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -420,9 +442,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.lawrence.reynolds.expenseMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -439,6 +465,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = expenseMe/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To take pictures of your receipts";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To enable geolocation on metadata within the app.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To access your photos to add expenses";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -452,9 +480,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.lawrence.reynolds.expenseMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -53,7 +53,7 @@ struct AddExpenseView: View {
                         if addExpenseViewModel.sourceType == .camera {
                             ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date, location: $addExpenseViewModel.location) {
+                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date) {
                                 
                             }
                         }
@@ -70,9 +70,6 @@ struct AddExpenseView: View {
         .alert(isPresented: $addExpenseViewModel.showErrorMessage) {
             Alert(title: Text("Error!"), message: Text(addExpenseViewModel.errorMessage),
                   dismissButton: .default(Text("Got it!")))
-        }
-        .onAppear {
-            print("onAppear: \(path.count)")
         }
     }
     
@@ -109,11 +106,11 @@ struct AddExpenseView: View {
                     .confirmationDialog("Choose an option", isPresented: $addExpenseViewModel.isConfirmationDialogPresented) {
                         Button("Camera") {
                             addExpenseViewModel.sourceType = .camera
-                            addExpenseViewModel.isImagePickerPresented = true
+                            addExpenseViewModel.presentPhotoPicker()
                         }
                         Button("Photo Library") {
                             addExpenseViewModel.sourceType = .photoLibrary
-                            addExpenseViewModel.isImagePickerPresented = true
+                            addExpenseViewModel.presentPhotoPicker()
                         }
                     }
                 Spacer()
@@ -166,8 +163,8 @@ struct AddExpenseView_Preview: PreviewProvider {
             fatalError("Unable to create modelContainer: \(error)")
         }
     }()
-    static var addExpenseViewModel = AddExpenseViewModel(modelContext: modelContext)
-    
+    static let lm = LocationManager()
+    static var addExpenseViewModel = AddExpenseViewModel(modelContext: modelContext, locationManager: lm)
     static var previews: some View {
         VStack {
             AddExpenseView(path: $path)

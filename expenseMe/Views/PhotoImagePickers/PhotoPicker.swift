@@ -9,54 +9,63 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-    
+        
     @Binding var selectedImage: UIImage?
     @Binding var date: Date?
-    @Binding var location: CLLocationCoordinate2D?
     
     var onImagePicked: () -> Void
     
-    class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        var parent: PhotoPicker
-        init(parent: PhotoPicker) {
-            self.parent = parent
-        }
-        
+    @Environment(\.presentationMode) var presentationMode
+    
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+        config.filter = .images
+        config.selectionLimit = 1
+        let controller = PHPickerViewController(configuration: config)
+        controller.delegate = context.coordinator
+        return controller
+    }
+    
+    func makeCoordinator() -> PhotoPicker.Coordinator {
+        return Coordinator(self)
+    }
+    
+    
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+    }
+    
+    class Coordinator: PHPickerViewControllerDelegate {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            if let result = results.first {
-                result .itemProvider.loadObject(ofClass: UIImage.self) { object, error in
-                    if let uiImage = object as? UIImage {
+            parent.presentationMode.wrappedValue.dismiss()
+            guard !results.isEmpty else {
+                return
+            }
+            
+            let imageResult = results[0]
+            
+            if let assetId = imageResult.assetIdentifier {
+                let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
+                DispatchQueue.main.async {
+                    self.parent.date = assetResults.firstObject?.creationDate
+                }
+            }
+            if imageResult.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                imageResult.itemProvider.loadObject(ofClass: UIImage.self) { (selectedImage, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
                         DispatchQueue.main.async {
-                            self.parent.selectedImage = uiImage
                             self.parent.onImagePicked()
+                            self.parent.selectedImage = selectedImage as? UIImage
                         }
                     }
                 }
-                if let assetId = result.assetIdentifier {
-                    let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
-                    DispatchQueue.main.async {
-                        self.parent.date = assetResults.firstObject?.creationDate
-                        self.parent.location = assetResults.firstObject?.location?.coordinate
-                    }
-                }
             }
-            picker.dismiss(animated: true, completion: nil)
+        }
+        
+        private let parent: PhotoPicker
+        init(_ parent: PhotoPicker) {
+            self.parent = parent
         }
     }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
-    }
-    
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration .filter = .images
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
-    
 }
