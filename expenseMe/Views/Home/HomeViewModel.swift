@@ -1,35 +1,23 @@
-//
-//  HomeViewModel.swift
-//  expenseMe
-//
-//  Created by Lawrence Reynolds on 08/04/2024.
-//
-
 import Foundation
 import SwiftData
 
 class HomeViewModel: ObservableObject {
-    
+
     @Published var expenses: [Expense] = []
     @Published var runningExpenseTotal: Double = 0
-    
-    let modelContext: ModelContext
-    
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
+
+    let swiftDataManager: SwiftDataManager
+
+    init(swiftDataManager: SwiftDataManager) {
+        self.swiftDataManager = swiftDataManager
     }
-    
+
     func fetchExpenses() {
-        let fetchDescriptor = FetchDescriptor<Expense>(
-            sortBy: [SortDescriptor(\.expenseID)]
-        )
-        do {
-            expenses = try modelContext.fetch(fetchDescriptor)
+        if let expenses = swiftDataManager.fetchExpenses() {
+            self.expenses = expenses
             if !expenses.isEmpty {
                 calculateTotalExpenseAmount()
             }
-        } catch {
-            print("Unable to fetch expenses: \(error)")
         }
     }
     
@@ -39,5 +27,4 @@ class HomeViewModel: ObservableObject {
             self.runningExpenseTotal += expense.expenseAmount
         }
     }
-    
 }

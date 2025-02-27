@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  expenseMe
-//
-//  Created by Lawrence Reynolds on 08/04/2024.
-//
-
 import SwiftUI
 
 struct HomeView: View {
@@ -32,6 +25,9 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
+            }
+            .onAppear {
+                homeViewModel.fetchExpenses()
             }
         }
     }

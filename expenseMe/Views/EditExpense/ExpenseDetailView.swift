@@ -1,10 +1,3 @@
-//
-//  EditExpenseView.swift
-//  expenseMe
-//
-//  Created by Lawrence Reynolds on 15/04/2024.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -37,9 +30,9 @@ struct ExpenseDetailView: View {
                     .padding()
                     .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
                         if addExpenseViewModel.sourceType == .camera {
-                            ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
+                            ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.selectedImage, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date) {
+                            PhotoPicker(selectedImageData: $addExpenseViewModel.selectedImageData, date: $addExpenseViewModel.date) {
                                 handleImagePicked()
                             }
                         }
@@ -59,16 +52,12 @@ struct ExpenseDetailView: View {
             deleteButton
         }
         .alert(isPresented: $showDeleteAlert) {
-            Alert(title: Text("Are you sure you want to delete this expense?"), message: Text(addExpenseViewModel.errorMessage),
+            Alert(title: Text("Are you sure you want to delete this expense?"), message: Text(addExpenseViewModel.errorMessageReason),
                   primaryButton: .destructive(Text("Delete")) {
                 addExpenseViewModel.deleteExpenseItem(expense: expense)
                 path.removeLast()
             },
                   secondaryButton: .cancel())
-        }
-        .onAppear {
-            print(expense.expenseImageLatitude)
-            print(expense.expenseImageLongitude)
         }
     }
     
@@ -100,15 +89,15 @@ struct ExpenseDetailView: View {
             if addExpenseViewModel.geocodingInProgress {
                 ProgressView("Loading Metadata....")
             } else {
-                if let date = addExpenseViewModel.date {
-                    Text("Date: \(date.formatted(date: .abbreviated, time: .omitted))")
-                } else {
-                    Text("No Metadata Date found")
-                }
-                if let metadataDetails = addExpenseViewModel.metadataLocationDetails {
-                    Text("Location: \(metadataDetails.name)")
-                    Text("Location: \(metadataDetails.city)")
-                    Text("Location: \(metadataDetails.country)")
+                if let metadataDetails = expense.geolocationMetadata {
+                    Text("Date: \(expense.expenseImageDate?.formatted(date: .abbreviated, time: .omitted) ?? Date.distantPast.formatted(date: .abbreviated, time: .omitted))")
+                    Text(metadataDetails.name)
+                    Text(metadataDetails.city)
+                    Text(metadataDetails.country)
+                    Text(metadataDetails.postalCode)
+                        .padding(.bottom)
+                    Text("longitude: \(metadataDetails.longitude)")
+                    Text("latitude: \(metadataDetails.latitude)")
                 } else {
                     Text("No Metadata Location found")
                 }
@@ -162,8 +151,8 @@ struct ExpenseDetailView: View {
         }
     }
     private func handleImagePicked() {
-        if let image = addExpenseViewModel.image {
-            expense.image = image.jpegData(compressionQuality: 1.0)
+        if let image = addExpenseViewModel.selectedImageData {
+            expense.image = image
         }
     }
 }
@@ -180,9 +169,10 @@ struct ExpenseDetailView_Preview: PreviewProvider {
         }
     }()
     static var locationManager = LocationManager()
-    static var viewModel = AddExpenseViewModel(modelContext: modelContext, locationManager: locationManager)
+    static let sdm = SwiftDataManager(modelContext: modelContext)
+    static var addExpenseViewModel = AddExpenseViewModel(swiftDataManager: sdm, locationManager: locationManager)
     static var previews: some View {
         ExpenseDetailView(path: $path, expense: Expense(expenseName: "Expense", expenseAmount: 12.00))
-            .environmentObject(viewModel)
+            .environmentObject(addExpenseViewModel)
     }
 }

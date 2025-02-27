@@ -9,8 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-        
-    @Binding var selectedImage: UIImage?
+    
+    @Binding var selectedImageData: Data?
     @Binding var date: Date?
     
     var onImagePicked: () -> Void
@@ -45,18 +45,15 @@ struct PhotoPicker: UIViewControllerRepresentable {
             
             if let assetId = imageResult.assetIdentifier {
                 let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
-                DispatchQueue.main.async {
-                    self.parent.date = assetResults.firstObject?.creationDate
-                }
-            }
-            if imageResult.itemProvider.canLoadObject(ofClass: UIImage.self) {
-                imageResult.itemProvider.loadObject(ofClass: UIImage.self) { (selectedImage, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
+                if let asset = assetResults.firstObject {
+                    let options = PHImageRequestOptions()
+                    options.isSynchronous = true
+                    options.isNetworkAccessAllowed = true
+                    
+                    PHImageManager.default().requestImageDataAndOrientation(for: asset, options: options) { data, _, _, info in
                         DispatchQueue.main.async {
-                            self.parent.onImagePicked()
-                            self.parent.selectedImage = selectedImage as? UIImage
+                            self.parent.date = asset.creationDate
+                            self.parent.selectedImageData = data
                         }
                     }
                 }

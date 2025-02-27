@@ -11,7 +11,17 @@
 		0459115D2BC436BE009FD342 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459115C2BC436BE009FD342 /* AddExpenseViewModel.swift */; };
 		045911622BC4389B009FD342 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045911612BC4389B009FD342 /* HomeView.swift */; };
 		045911642BC438B4009FD342 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045911632BC438B4009FD342 /* HomeViewModel.swift */; };
+		047225E02D68D48F00D8E136 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047225DF2D68D48F00D8E136 /* SwiftDataManager.swift */; };
 		047545E42B22009500A3EC8E /* ExpenseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047545E32B22009500A3EC8E /* ExpenseItemView.swift */; };
+		048E7F822D6F5259005BFB98 /* ExpenseValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7F812D6F5259005BFB98 /* ExpenseValidationError.swift */; };
+		048E7F852D6F5876005BFB98 /* LocationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7F842D6F5876005BFB98 /* LocationManaging.swift */; };
+		048E7F9B2D6F5AF8005BFB98 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7F9A2D6F5AF8005BFB98 /* MockLocationManager.swift */; };
+		048E7F9C2D6F5B39005BFB98 /* LocationManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7F842D6F5876005BFB98 /* LocationManaging.swift */; };
+		048E7F9E2D6F5D59005BFB98 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7F9D2D6F5D59005BFB98 /* LocationManagerTests.swift */; };
+		048E7FA22D6F5F7D005BFB98 /* PlacemarkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7FA12D6F5F7D005BFB98 /* PlacemarkMock.swift */; };
+		048E7FA42D6F6244005BFB98 /* SwiftDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7FA32D6F6244005BFB98 /* SwiftDataManagerTests.swift */; };
+		048E7FA62D6F6292005BFB98 /* SwiftDataManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7FA52D6F6292005BFB98 /* SwiftDataManaging.swift */; };
+		048E7FA82D6F6309005BFB98 /* MockSwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E7FA72D6F6309005BFB98 /* MockSwiftDataManager.swift */; };
 		04BAF2F22C2AAEBE001E7CBF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F12C2AAEBE001E7CBF /* LocationManager.swift */; };
 		04BAF2F42C2AAF31001E7CBF /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F32C2AAF31001E7CBF /* GeoLocation.swift */; };
 		04BAF2F62C2AB316001E7CBF /* GeocodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAF2F52C2AB316001E7CBF /* GeocodeError.swift */; };
@@ -28,12 +38,32 @@
 		04EE48672BCD3DBF00F22368 /* ExpenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EE48662BCD3DBF00F22368 /* ExpenseDetailView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		048E7F8E2D6F598B005BFB98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04D0FC572B206C4900AABF70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04D0FC5E2B206C4900AABF70;
+			remoteInfo = expenseMe;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0421E9972C19F1C80064419C /* NavigationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestination.swift; sourceTree = "<group>"; };
 		0459115C2BC436BE009FD342 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		045911612BC4389B009FD342 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		045911632BC438B4009FD342 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		047225DF2D68D48F00D8E136 /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		047545E32B22009500A3EC8E /* ExpenseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseItemView.swift; sourceTree = "<group>"; };
+		048E7F812D6F5259005BFB98 /* ExpenseValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseValidationError.swift; sourceTree = "<group>"; };
+		048E7F842D6F5876005BFB98 /* LocationManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManaging.swift; sourceTree = "<group>"; };
+		048E7F8A2D6F598B005BFB98 /* expenseMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = expenseMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		048E7F9A2D6F5AF8005BFB98 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
+		048E7F9D2D6F5D59005BFB98 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
+		048E7FA12D6F5F7D005BFB98 /* PlacemarkMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacemarkMock.swift; sourceTree = "<group>"; };
+		048E7FA32D6F6244005BFB98 /* SwiftDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManagerTests.swift; sourceTree = "<group>"; };
+		048E7FA52D6F6292005BFB98 /* SwiftDataManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManaging.swift; sourceTree = "<group>"; };
+		048E7FA72D6F6309005BFB98 /* MockSwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSwiftDataManager.swift; sourceTree = "<group>"; };
 		04BAF2F12C2AAEBE001E7CBF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		04BAF2F32C2AAF31001E7CBF /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
 		04BAF2F52C2AB316001E7CBF /* GeocodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeError.swift; sourceTree = "<group>"; };
@@ -53,6 +83,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		048E7F872D6F598B005BFB98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04D0FC5C2B206C4900AABF70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,6 +135,76 @@
 			path = ExpenseItem;
 			sourceTree = "<group>";
 		};
+		047225DD2D68D46000D8E136 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				047225DE2D68D47A00D8E136 /* SwiftDataManager */,
+				04BAF2F02C2AAEA2001E7CBF /* LocationManager */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		047225DE2D68D47A00D8E136 /* SwiftDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				047225DF2D68D48F00D8E136 /* SwiftDataManager.swift */,
+			);
+			path = SwiftDataManager;
+			sourceTree = "<group>";
+		};
+		048E7F802D6F5249005BFB98 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				048E7F812D6F5259005BFB98 /* ExpenseValidationError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		048E7F832D6F585E005BFB98 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				048E7F842D6F5876005BFB98 /* LocationManaging.swift */,
+				048E7FA52D6F6292005BFB98 /* SwiftDataManaging.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		048E7F8B2D6F598B005BFB98 /* expenseMeTests */ = {
+			isa = PBXGroup;
+			children = (
+				048E7F982D6F5AE0005BFB98 /* Mocks */,
+				048E7F942D6F59A7005BFB98 /* ViewModelTests */,
+				048E7F932D6F599F005BFB98 /* ManagerTests */,
+			);
+			path = expenseMeTests;
+			sourceTree = "<group>";
+		};
+		048E7F932D6F599F005BFB98 /* ManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				048E7F9D2D6F5D59005BFB98 /* LocationManagerTests.swift */,
+				048E7FA32D6F6244005BFB98 /* SwiftDataManagerTests.swift */,
+			);
+			path = ManagerTests;
+			sourceTree = "<group>";
+		};
+		048E7F942D6F59A7005BFB98 /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
+		048E7F982D6F5AE0005BFB98 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				048E7F9A2D6F5AF8005BFB98 /* MockLocationManager.swift */,
+				048E7FA12D6F5F7D005BFB98 /* PlacemarkMock.swift */,
+				048E7FA72D6F6309005BFB98 /* MockSwiftDataManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		04BAF2F02C2AAEA2001E7CBF /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +226,9 @@
 		04D0FC562B206C4900AABF70 = {
 			isa = PBXGroup;
 			children = (
+				04D0FC662B206C4B00AABF70 /* Assets.xcassets */,
 				04D0FC612B206C4900AABF70 /* expenseMe */,
+				048E7F8B2D6F598B005BFB98 /* expenseMeTests */,
 				04D0FC602B206C4900AABF70 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				04D0FC5F2B206C4900AABF70 /* expenseMe.app */,
+				048E7F8A2D6F598B005BFB98 /* expenseMeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,14 +245,15 @@
 		04D0FC612B206C4900AABF70 /* expenseMe */ = {
 			isa = PBXGroup;
 			children = (
+				048E7F832D6F585E005BFB98 /* Protocols */,
+				048E7F802D6F5249005BFB98 /* Errors */,
 				04D123A72BF62FF100EBE588 /* Info.plist */,
-				04BAF2F02C2AAEA2001E7CBF /* LocationManager */,
+				047225DD2D68D46000D8E136 /* Manager */,
 				04D123A82BF6373400EBE588 /* Extensions */,
 				04C8D3432B6CE8550064BCAC /* Enums */,
 				04D0FC792B2071E200AABF70 /* Models */,
 				04D0FC712B2070B500AABF70 /* RootViews */,
 				04D0FC702B2070AD00AABF70 /* Views */,
-				04D0FC662B206C4B00AABF70 /* Assets.xcassets */,
 				04D0FC682B206C4B00AABF70 /* Preview Content */,
 			);
 			path = expenseMe;
@@ -205,6 +316,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		048E7F892D6F598B005BFB98 /* expenseMeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048E7F902D6F598B005BFB98 /* Build configuration list for PBXNativeTarget "expenseMeTests" */;
+			buildPhases = (
+				048E7F862D6F598B005BFB98 /* Sources */,
+				048E7F872D6F598B005BFB98 /* Frameworks */,
+				048E7F882D6F598B005BFB98 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048E7F8F2D6F598B005BFB98 /* PBXTargetDependency */,
+			);
+			name = expenseMeTests;
+			productName = expenseMeTests;
+			productReference = 048E7F8A2D6F598B005BFB98 /* expenseMeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		04D0FC5E2B206C4900AABF70 /* expenseMe */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04D0FC6D2B206C4B00AABF70 /* Build configuration list for PBXNativeTarget "expenseMe" */;
@@ -218,6 +347,8 @@
 			dependencies = (
 			);
 			name = expenseMe;
+			packageProductDependencies = (
+			);
 			productName = expenseMe;
 			productReference = 04D0FC5F2B206C4900AABF70 /* expenseMe.app */;
 			productType = "com.apple.product-type.application";
@@ -229,9 +360,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					048E7F892D6F598B005BFB98 = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
+						TestTargetID = 04D0FC5E2B206C4900AABF70;
+					};
 					04D0FC5E2B206C4900AABF70 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -246,16 +382,26 @@
 				Base,
 			);
 			mainGroup = 04D0FC562B206C4900AABF70;
+			packageReferences = (
+			);
 			productRefGroup = 04D0FC602B206C4900AABF70 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				04D0FC5E2B206C4900AABF70 /* expenseMe */,
+				048E7F892D6F598B005BFB98 /* expenseMeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		048E7F882D6F598B005BFB98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04D0FC5D2B206C4900AABF70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,6 +414,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		048E7F862D6F598B005BFB98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048E7FA22D6F5F7D005BFB98 /* PlacemarkMock.swift in Sources */,
+				048E7FA82D6F6309005BFB98 /* MockSwiftDataManager.swift in Sources */,
+				048E7F9B2D6F5AF8005BFB98 /* MockLocationManager.swift in Sources */,
+				048E7F9E2D6F5D59005BFB98 /* LocationManagerTests.swift in Sources */,
+				048E7F9C2D6F5B39005BFB98 /* LocationManaging.swift in Sources */,
+				048E7FA42D6F6244005BFB98 /* SwiftDataManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04D0FC5B2B206C4900AABF70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,14 +438,18 @@
 				04D0FC752B20716E00AABF70 /* AddExpenseView.swift in Sources */,
 				0459115D2BC436BE009FD342 /* AddExpenseViewModel.swift in Sources */,
 				045911622BC4389B009FD342 /* HomeView.swift in Sources */,
+				048E7F822D6F5259005BFB98 /* ExpenseValidationError.swift in Sources */,
 				04EE48672BCD3DBF00F22368 /* ExpenseDetailView.swift in Sources */,
 				04D0FC652B206C4900AABF70 /* ContentView.swift in Sources */,
+				048E7FA62D6F6292005BFB98 /* SwiftDataManaging.swift in Sources */,
 				04D123AA2BF6375300EBE588 /* UIScreenExtension.swift in Sources */,
 				0421E9982C19F1C80064419C /* NavigationDestination.swift in Sources */,
+				048E7F852D6F5876005BFB98 /* LocationManaging.swift in Sources */,
 				04D0FC632B206C4900AABF70 /* expenseMeApp.swift in Sources */,
 				04C8D3452B6CE8620064BCAC /* SourceType.swift in Sources */,
 				04C8D3422B6CE38A0064BCAC /* ImagePicker.swift in Sources */,
 				04BAF2F62C2AB316001E7CBF /* GeocodeError.swift in Sources */,
+				047225E02D68D48F00D8E136 /* SwiftDataManager.swift in Sources */,
 				04C8D3492B6CF48A0064BCAC /* PhotoPicker.swift in Sources */,
 				04D0FC7B2B2071ED00AABF70 /* Expense.swift in Sources */,
 			);
@@ -294,7 +457,56 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		048E7F8F2D6F598B005BFB98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04D0FC5E2B206C4900AABF70 /* expenseMe */;
+			targetProxy = 048E7F8E2D6F598B005BFB98 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		048E7F912D6F598B005BFB98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LG5R7PCL7H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lawrence.expenseMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/expenseMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/expenseMe";
+			};
+			name = Debug;
+		};
+		048E7F922D6F598B005BFB98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LG5R7PCL7H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lawrence.expenseMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/expenseMe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/expenseMe";
+			};
+			name = Release;
+		};
 		04D0FC6B2B206C4B00AABF70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -493,6 +705,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		048E7F902D6F598B005BFB98 /* Build configuration list for PBXNativeTarget "expenseMeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048E7F912D6F598B005BFB98 /* Debug */,
+				048E7F922D6F598B005BFB98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04D0FC5A2B206C4900AABF70 /* Build configuration list for PBXProject "expenseMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

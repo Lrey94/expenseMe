@@ -1,10 +1,3 @@
-//
-//  AddExpenseView.swift
-//  expenseMe
-//
-//  Created by Lawrence Reynolds on 08/04/2024
-//
-
 import SwiftUI
 import PhotosUI
 import SwiftData
@@ -19,21 +12,24 @@ struct AddExpenseView: View {
     
     var body: some View {
         VStack {
-            if let image = addExpenseViewModel.image {
+            if let imageData = addExpenseViewModel.selectedImageData {
+                let uiImage = UIImage(data: imageData)
                 ZStack(alignment: .topTrailing) {
                     VStack(alignment: .leading) {
                         Text("Your Chosen Image")
                             .fontWeight(.bold)
                             .font(.title3)
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width - 60, height: 200)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .shadow(radius: 5)
+                        if let image = uiImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: UIScreen.main.bounds.width - 60, height: 200)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .shadow(radius: 5)
+                        }
                     }
                     Button(action: {
                         withAnimation {
-                            addExpenseViewModel.image = nil
+                            addExpenseViewModel.selectedImageData = nil
                         }
                     }) {
                         Image(systemName: "x.circle.fill")
@@ -51,9 +47,9 @@ struct AddExpenseView: View {
                     .padding()
                     .sheet(isPresented: $addExpenseViewModel.isImagePickerPresented) {
                         if addExpenseViewModel.sourceType == .camera {
-                            ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.image, sourceType: .camera)
+                            ImagePicker(isPresented: $addExpenseViewModel.isImagePickerPresented, image: $addExpenseViewModel.selectedImage, sourceType: .camera)
                         } else {
-                            PhotoPicker(selectedImage: $addExpenseViewModel.image, date: $addExpenseViewModel.date) {
+                            PhotoPicker(selectedImageData: $addExpenseViewModel.selectedImageData, date: $addExpenseViewModel.date) {
                                 
                             }
                         }
@@ -68,15 +64,23 @@ struct AddExpenseView: View {
             Spacer()
         }
         .alert(isPresented: $addExpenseViewModel.showErrorMessage) {
-            Alert(title: Text("Error!"), message: Text(addExpenseViewModel.errorMessage),
+            Alert(title: Text(addExpenseViewModel.errorMessageReason), message: Text(addExpenseViewModel.errorMessageRecoverySuggestion),
                   dismissButton: .default(Text("Got it!")))
+        }
+        .onAppear {
+            addExpenseViewModel.resetExpenseData()
         }
     }
     
     var saveButton: some View {
         Button {
-            addExpenseViewModel.addExpenseItem()
-            path.removeLast()
+            addExpenseViewModel.addExpenseItem() { success in
+                if success {
+                    if !path.isEmpty {
+                        path.removeLast()
+                    }
+                }
+            }
         } label: {
             HStack {
                 Image(systemName: "checkmark")
@@ -130,8 +134,13 @@ struct AddExpenseNameTextField: View {
                 .fontWeight(.semibold)
             TextField(text, text: $viewModel.expenseName)
                 .textFieldStyle(.roundedBorder)
+                .background(.white)
+                .overlay (
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(viewModel.addExpenseErrorBorder == .expenseName ? .red : .gray.opacity(0.5), lineWidth: 2)
+                )
         }
-        .padding([.leading, .top])
+        .padding([.horizontal, .top])
     }
 }
 
@@ -147,8 +156,13 @@ struct AddExpenseAmountTextField: View {
                 .fontWeight(.semibold)
             TextField(text, value: $viewModel.expenseAmount, format: .number)
                 .textFieldStyle(.roundedBorder)
+                .background(.white)
+                .overlay (
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(viewModel.addExpenseErrorBorder == .expenseAmount ? .red : .gray.opacity(0.5), lineWidth: 2)
+                )
         }
-        .padding([.leading, .top])
+        .padding([.horizontal, .top])
     }
 }
 
@@ -164,7 +178,8 @@ struct AddExpenseView_Preview: PreviewProvider {
         }
     }()
     static let lm = LocationManager()
-    static var addExpenseViewModel = AddExpenseViewModel(modelContext: modelContext, locationManager: lm)
+    static let sdm = SwiftDataManager(modelContext: modelContext)
+    static var addExpenseViewModel = AddExpenseViewModel(swiftDataManager: sdm, locationManager: lm)
     static var previews: some View {
         VStack {
             AddExpenseView(path: $path)
