@@ -91,7 +91,7 @@ class AddExpenseViewModel: ObservableObject {
         completion(true)
     }
 
-    private func buildExpenseObject(imageData: Data, placeMark: CLPlacemark?, longitude: Double?, latitude: Double?) -> Expense {
+    fileprivate func buildExpenseObject(imageData: Data, placeMark: CLPlacemark?, longitude: Double?, latitude: Double?) -> Expense {
         if let placeMark = placeMark {
             return Expense(expenseName: expenseName,
                            expenseAmount: expenseAmount,
@@ -112,7 +112,7 @@ class AddExpenseViewModel: ObservableObject {
         }
     }
 
-    private func extractLocationMetadata(from imageData: Data) -> CLLocationCoordinate2D? {
+    fileprivate func extractLocationMetadata(from imageData: Data) -> CLLocationCoordinate2D? {
         var tempLocation: CLLocationCoordinate2D? = nil
 
         var extractedMetadata: [String: Any] = [:]
@@ -144,6 +144,14 @@ class AddExpenseViewModel: ObservableObject {
 
     func deleteExpenseItem(expense: Expense) {
         swiftDataManager.deleteExpense(expense: expense)
+    }
+    
+    
+    func resetExpenseData() {
+        selectedImageData = nil
+        expenseName = ""
+        expenseAmount = 0.0
+        addExpenseErrorBorder = .none
     }
 
     func requestPhotoLibraryAccess(completion: @escaping (Bool) -> Void) {
@@ -189,7 +197,7 @@ class AddExpenseViewModel: ObservableObject {
         }
     }
     
-    private func handleError(_ error: Error) {
+    fileprivate func handleError(_ error: Error) {
         if let localisedError = error as? LocalizedError {
             errorMessageReason = localisedError.failureReason ?? "An Unknown error occured."
             errorMessageRecoverySuggestion = localisedError.recoverySuggestion ?? ""
@@ -199,7 +207,7 @@ class AddExpenseViewModel: ObservableObject {
         showErrorMessage = true
     }
 
-    private func validateExpenseItem() throws {
+    fileprivate func validateExpenseItem() throws {
         guard !expenseName.isEmpty else {
             addExpenseErrorBorder = .expenseName
             throw ExpenseValidationError.nameEmptyError
@@ -219,12 +227,5 @@ class AddExpenseViewModel: ObservableObject {
             addExpenseErrorBorder = .expenseAmount
             throw ExpenseValidationError.amountIsTooHighError
         }
-    }
-
-    func resetExpenseData() {
-        selectedImageData = nil
-        expenseName = ""
-        expenseAmount = 0.0
-        addExpenseErrorBorder = .none
     }
 }
